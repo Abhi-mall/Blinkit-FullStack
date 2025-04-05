@@ -58,11 +58,11 @@ const userSchema = new mongoose.Schema({
       ref : 'order'
     }
   ],
-  forget_password_otp : {
+  forgot_password_otp : {
     type : String,
     default : null
   },
-  forget_password_expire : {
+  forgot_password_expiry : {
     type : Date,
     default : ""
   },

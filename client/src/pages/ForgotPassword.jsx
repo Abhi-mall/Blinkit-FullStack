@@ -6,20 +6,13 @@ import Axios from "../utils/Axios";
 import SummaryApi from "../common/summeryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import { Link, useNavigate } from "react-router-dom";
-import fetchUserDetails from "../utils/fetchUserDetails";
-import { useDispatch } from "react-redux";
-import { setUserDetails } from "../store/userSlice";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [data, setData] = useState({
     email: "",
-    password: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const validField = Object.values(data).every((el) => el);
 
@@ -38,7 +31,7 @@ const Login = () => {
 
     try {
       const response = await Axios({
-        ...SummaryApi.login,
+        ...SummaryApi.forgot_password,
         data: data,
       });
 
@@ -48,17 +41,12 @@ const Login = () => {
 
       if (response.data.success) {
         toast.success(response.data.message);
-        localStorage.setItem("accessToken", response.data.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.data.refreshToken);
-
-        const userDetails = await fetchUserDetails();
-        dispatch(setUserDetails(userDetails.data));
+        navigate("/verify-forgot-password", {
+          state: data,
+        });
         setData({
           email: "",
-          password: "",
         });
-
-        navigate("/");
       }
     } catch (error) {
       AxiosToastError(error);
@@ -68,6 +56,7 @@ const Login = () => {
   return (
     <section className="  w-full container mx-auto px-2">
       <div className="bg-white my-4 w-full max-w-lg mx-auto rounded p-7">
+        <p className="font-bold text-lg">Forgot Password</p>
         <form onSubmit={handleSubmit} className="grid gap-4 py-4 ">
           <div className="grid gap-1 ">
             <label htmlFor="email">Email :</label>
@@ -81,34 +70,6 @@ const Login = () => {
               className="bg-blue-50 p-2 border rounded outline-none focus:border-primary-200"
             ></input>
           </div>
-          <div className="grid gap-1 ">
-            <label htmlFor="password">Password :</label>
-            <div className="bg-blue-50 p-2 border rounded flex items-center focus-within:border-primary-200">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                id="password"
-                value={data.password}
-                onChange={handleChange}
-                name="password"
-                className="w-full outline-none"
-              ></input>
-              <div
-                onClick={() => {
-                  setShowPassword((preve) => !preve);
-                }}
-                className="cursor-pointer"
-              >
-                {showPassword ? <FaEye /> : <FaEyeSlash />}
-              </div>
-            </div>
-            <Link
-              to={"/forgot-password"}
-              className="ml-auto hover:text-primary-200"
-            >
-              Forgot password?
-            </Link>
-          </div>
 
           <button
             disabled={!validField}
@@ -116,17 +77,17 @@ const Login = () => {
               validField ? "bg-green-800 hover:bg-green-700" : "bg-gray-500"
             }    text-white py-2 rounded font-semibold my-3 tracking-wide`}
           >
-            Login
+            Send otp
           </button>
         </form>
         <p>
-          Don't have account ?
+          Already have account ?
           <Link
-            to={"/register"}
+            to={"/login"}
             className="font-semibold text-green-700 hover:text-green-800"
           >
             {" "}
-            Register
+            Login
           </Link>
         </p>
       </div>
@@ -134,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

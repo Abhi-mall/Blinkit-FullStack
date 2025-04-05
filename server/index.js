@@ -11,7 +11,7 @@ import userRouter from './routes/user.route.js'
 const app = express()
 app.use(cors({
   credentials: true,
-  origin: process.env.FRONTED_URI
+  origin: process.env.FRONTED_URL
 }))
 app.use(express.json())
 app.use(cookieParser())
