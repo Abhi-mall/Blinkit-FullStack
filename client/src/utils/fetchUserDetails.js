@@ -1,4 +1,4 @@
-import SummaryApi from "../common/summeryApi"
+import SummaryApi from "../common/SummaryApi"
 import Axios from "./Axios"
 
 
