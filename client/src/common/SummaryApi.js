@@ -1,3 +1,4 @@
+
 export const baseURL = "http://localhost:8080"
 
 const SummaryApi = {
@@ -85,11 +86,42 @@ const SummaryApi = {
     url : '/api/product/get',
     method : "post"
   },
+  getProductByCategory : {
+    url : '/api/product/get-product-by-category',
+    method : "post"
+  },
+  getProductByCategoryAndSubCategory : {
+    url : '/api/product/get-pruduct-by-category-and-subcategory',
+    method : 'post'
+  },
+  getProductDetails : {
+    url : "/api/product/get-product-details",
+    method : 'post'
+  },
+  searchProduct : {
+    url : '/api/product/search-product',
+    method : 'post'
+  },
   deleteProduct : {
     url : "/api/product/delete-product",
     method: 'delete'
+  },
+  addToCart : {
+    url : '/api/cart/create',
+    method : 'post'
+  },
+   getCartItem : {
+    url : '/api/cart/get',
+    method : 'get'
+  },
+  updateCartItemQty : {
+    url : '/api/cart/update-qty',
+    method : 'put'
+  },
+  deleteCartItem : {
+    url : '/api/cart/delete-cart-item',
+    method : 'delete'
   }
-
 
 
 }

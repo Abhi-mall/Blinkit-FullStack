@@ -36,6 +36,10 @@ const productSchema =  new mongoose.Schema({
     type : String,
     default : ""
   },
+  price : {
+    type : Number,
+    default : null
+  },
   more_details : {
     type : Object,
     default : {}
@@ -50,12 +54,9 @@ const productSchema =  new mongoose.Schema({
 })
 
 productSchema.index({
-  name : 'text',
+  name : "text",
   description : 'text'
-}, {
-  name : 10,
-  description : 5
-})
+}, { weights: { name: 10, description: 5 } })
 
 const ProductModel = mongoose.model("product", productSchema)
 

@@ -199,7 +199,7 @@ const UploadProductPage = () => {
                   type="file"
                   id="productImage"
                   className="hidden"
-                  accept="image/*"
+                  //accept="image/*"
                   onChange={handleUploadImage}
                 />
               </label>

@@ -1,23 +1,29 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import Search from "./Search";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import useMobile from "../hooks/useMobile";
 import { BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import UserMenu from "./UserMenu";
+import { DisplayPriceInRupees } from "../utils/DisplayPriceInRupees";
+import { useGlobalContext } from "../Provider/GlobalProvider";
+import DisplayCartItem from "./DisplayCartItem";
 
 const Header = () => {
   const [isMobile] = useMobile();
   const location = useLocation();
+  const [openCartSection, setOpenCartSection] = useState(false);
 
   const isSearchPage = location.pathname === "/search";
   const navigate = useNavigate();
 
   const user = useSelector((state) => state?.user);
   const [openUserMenu, setUserMenu] = useState(false);
+  const cartItem = useSelector((state) => state.cartItem.cart);
+  const { totalPrice, totalQty } = useGlobalContext();
 
   const handleCloseUserMenu = () => {
     setUserMenu(false);
@@ -95,12 +101,22 @@ const Header = () => {
                 </button>
               )}
 
-              <button className="flex items-center gap-2 bg-green-800 hover:bg-green-700 px-3 py-2 rounded text-white">
+              <button
+                onClick={() => setOpenCartSection(true)}
+                className="flex items-center gap-2 bg-green-800 hover:bg-green-700 px-3 py-2 rounded text-white"
+              >
                 <div className="animate-bounce">
                   <BsCart4 />
                 </div>
                 <div className="font-semibold text-sm">
-                  <p>My Cart</p>
+                  {cartItem[0] ? (
+                    <div>
+                      <p>{totalQty} Items</p>
+                      <p>{DisplayPriceInRupees(totalPrice)}</p>
+                    </div>
+                  ) : (
+                    <p>My Cart</p>
+                  )}
                 </div>
               </button>
             </div>
@@ -111,6 +127,10 @@ const Header = () => {
       <div className="container mx-auto px-2 lg:hidden">
         <Search />
       </div>
+
+      {openCartSection && (
+        <DisplayCartItem close={() => setOpenCartSection(false)} />
+      )}
     </header>
   );
 };

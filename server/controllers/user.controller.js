@@ -147,7 +147,7 @@ export async function loginController(request, response) {
 
     if(!checkPassword) {
       return response.status(400).json({
-        message : "Check your password",
+        message : "Invalid Credentials",
         error : true,
         success : false      
       })
@@ -496,7 +496,6 @@ export async function refreshToken(request,response){
       })
   }
 }
-
 
 //get login user details
 export async function userDetails(request,response){

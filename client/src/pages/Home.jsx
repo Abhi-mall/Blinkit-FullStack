@@ -2,24 +2,31 @@ import React from "react";
 import banner from "../assets/banner.jpg";
 import bannerMobile from "../assets/banner-mobile.jpg";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { valideURLConvert } from "../utils/valideURLConvert";
+import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
 
 const Home = () => {
   const categoryData = useSelector((state) => state.product.allCategory);
   const subCategoryData = useSelector((state) => state.product.allSubCategory);
+  const navigate = useNavigate();
   const loadingCategory = useSelector((state) => {
     state.product.loadingCategory;
   });
 
   const handleRedirectProductListpage = (id, cat) => {
-    console.log(id, cat);
-
     const subCategory = subCategoryData.find((sub) => {
       const filterData = sub.category.some((c) => {
         return c._id == id;
       });
+      return filterData ? true : null;
     });
 
-    return filterData ? true : null;
+    const url = `/${valideURLConvert(cat)}-${id}/${valideURLConvert(
+      subCategory.name
+    )}-${subCategory._id}`;
+
+    navigate(url);
   };
   return (
     <section className="bg-white">
@@ -74,6 +81,16 @@ const Home = () => {
               );
             })}
       </div>
+
+      {categoryData?.map((c, index) => {
+        return (
+          <CategoryWiseProductDisplay
+            key={c?._id + "CategorywiseProduct"}
+            id={c?._id}
+            name={c?.name}
+          />
+        );
+      })}
     </section>
   );
 };
