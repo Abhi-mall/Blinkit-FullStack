@@ -1,10 +1,16 @@
-    
-
 {
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    }
-  ]
-}
+    "version" : 2,
+    "name" : "Blinkit",
+    "builds" : [
+        {
+            "src" : "./index.js",
+            "use" : "@vercel/node"
+        }
+    ],
+    "routes" : [
+        {
+            "src" : "/(.*)",
+            "dest" : "/"
+        }
+    ]
+}     
