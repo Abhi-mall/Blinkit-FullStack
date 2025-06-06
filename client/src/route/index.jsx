@@ -8,7 +8,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import OtpVerification from "../pages/OtpVerification";
 import ResetPassword from "../pages/ResetPassword";
 import UserMenuMobile from "../pages/UserMenuMobile";
-import Dashboard from "../layout/dashboard";
+import Dashboard from "../layout/Dashboard";
 import Profile from "../pages/Profile";
 import MyOrders from "../pages/MyOrders";
 import Address from "../pages/Address";
