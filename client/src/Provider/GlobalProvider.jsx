@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleAddItemCart } from "../store/cartProduct";
 import AxiosToastError from "../utils/AxiosToastError";
 import toast from "react-hot-toast";
-import { pricewithDiscount } from "../utils/PriceWithDiscount";
+import { pricewithDiscount } from "../utils/PricewithDiscount";
 
 export const GlobalContext = createContext(null);
 
