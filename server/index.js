@@ -44,3 +44,6 @@ app.use("/api/file",uploadRouter)
 app.use("/api/subcategory",subCategoryRouter)
 app.use('/api/product',productRouter)
 app.use('/api/cart', cartRouter)
+
+
+export default app;
