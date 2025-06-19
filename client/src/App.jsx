@@ -11,6 +11,7 @@ import SummaryApi from "./common/SummaryApi";
 import { setAllCategory, setAllSubCategory } from "./store/productSlice";
 import GlobalProvider from "./Provider/GlobalProvider";
 import AxiosToastError from "./utils/AxiosToastError";
+import CartMobileLink from "./components/CartMobile";
 
 function App() {
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ function App() {
       </main>
       <Footer />
       <Toaster />
+      <CartMobileLink />
     </GlobalProvider>
   );
 }
